@@ -1,0 +1,98 @@
+.wrapper {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* עטיפה שמכילה את הכפתור והפאנל */
+.filterContainer {
+  position: relative; /* פאנל ייפתח ביחס לכפתור */
+  display: inline-block;
+}
+
+/* Toggle button */
+.toggleBtn {
+  background-color: white;
+  border: 1px solid black;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* The open panel */
+.panel {
+  position: absolute;
+  top: 45px;     /* מתחת לכפתור */
+  left: 0;
+  width: 450px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+/* Each section inside */
+.section {
+  margin-bottom: 15px;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Tag buttons */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tagBtn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  background-color: white;
+  cursor: pointer;
+}
+
+.tagBtnActive {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #d0e6ff;
+  cursor: pointer;
+}
+
+/* Rating select */
+.select {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  font-size: 15px;
+}
+
+/* Reset button */
+.resetBtn {
+  background-color: white;
+  border: 1px solid black;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.resetBtn:hover {
+  background-color: gray;
+}
+.numberInput {
+  width: 70px;
+  padding: 6px 8px;
+  font-size: 15px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}

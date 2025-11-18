@@ -1,0 +1,19 @@
+.wrapper {  
+  margin-bottom: 20px;   /* רווח מלמטה */
+  margin-top: 10px;      /* רווח מלמעלה */  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-color: solid black;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid black;
+  font-size: 15px;
+  background-color: white;
+}

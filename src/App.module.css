@@ -1,0 +1,27 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;      /* כרטיס חדש יורד שורה כשהמקום נגמר */
+  gap: 20px;            /* רווחים בין כרטיסים */
+  justify-content: center; /* מרכז את הכרטיסים במיכל */
+}
+.a {
+    margin-left: 20px;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+
+}
+.title {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5rem;
+    color: #333;
+}
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 20px;
+  padding: 40px 0;
+  color: #666;
+  font-weight: 500;
+}

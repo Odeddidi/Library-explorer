@@ -1,0 +1,10 @@
+.searchContainer {
+  margin-bottom: 20px;   /* רווח מלמטה */
+  margin-top: 10px;      /* רווח מלמעלה */
+}
+
+.input {
+  padding: 10px;
+  width: 300px;
+  font-size: 16px;
+}
