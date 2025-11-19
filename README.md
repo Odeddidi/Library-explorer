@@ -2,7 +2,12 @@
 
 A small React + TypeScript project.  
 The application loads a list of books, supports searching, filtering, sorting, and favorites — all implemented in a clean and user-friendly UI.
+
 ---
+## Table of Contents
+- [Overview](#Overview)
+- [Running Instructions](#Running-instructions)
+- [Media Examples](#Media-Examples)
 
 ## 📘 Overview
 The app lets users:
@@ -17,9 +22,14 @@ The app lets users:
 - Enjoy full **TypeScript types**, accessibility features, and clean modular components
 
 ---
+## Running instructions
+### Download Instructions
+1. Download the ZIP from GitHub (Code → Download ZIP)
+2. Extract the folder anywhere on your computer
+3. Open a terminal and move inside the project folder:
+   cd library-explorer
 
-##  Running Instructions
-
+###  Running Locally
 1. Install dependencies:
 ```
 npm install
@@ -32,7 +42,7 @@ The app will run at:
 ```
 http://localhost:3000
 ```
-# Running on custom port:
+**Running on custom port:**
 
 **macOS / Linux**
 ```
@@ -44,7 +54,29 @@ set PORT=4000 && npm start
 ```
 The app will run at:
 ```
-http://localhost:your-port
+http://localhost:4000
+```
+
+### Running with Docker:
+
+ **1. Build the Docker image:**
+```
+docker build -t library-explorer .
+```
+**2. Run the container:**
+```
+docker run -p 3000:3000 library-explorer
+```
+Now open:
+```
+http://localhost:3000
+```
+**Run on a different port:**
+```
+docker run -p 8080:3000 library-explorer
+```
+```
+open http://localhost:8080
 ```
 
 ---
@@ -53,7 +85,7 @@ http://localhost:your-port
 
 ```
 public/
- |-books.json
+ |- books.json
 src/
  ├─ components/
  │   ├─ BookCard/
@@ -65,7 +97,8 @@ src/
  ├─ types.ts
  ├─ App.tsx
  ├─ App.module.css
- └─ index.tsx
+ |─ index.tsx
+ |- Dockerfile 
 ```
 
 All UI components are separated for clarity and maintainability.
@@ -90,15 +123,6 @@ All UI components are separated for clarity and maintainability.
 <img src="media/image-3.png" width="500" />
 
 </div>
-
----
-
-##  Notes
-
-- The layout is responsive and clean
-- Components are fully typed and modular
-- Filtering, searching, sorting, and favorites all work together seamlessly
-- Empty states give helpful feedback to the user
 
 ---
 
