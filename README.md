@@ -1,4 +1,5 @@
 # Library Explorer
+
 A small React + TypeScript project.  
 The application loads a list of books, supports searching, filtering, sorting, and favorites — all implemented in a clean and user-friendly UI.
 ---
@@ -17,7 +18,7 @@ The app lets users:
 
 ---
 
-## 🚀 Running Instructions
+##  Running Instructions
 
 1. Install dependencies:
 ```
@@ -48,7 +49,7 @@ http://localhost:your-port
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 public/
@@ -72,21 +73,21 @@ All UI components are separated for clarity and maintainability.
 ---
 
 
-## 🖼️ Media Examples
+## Media Examples
 
 <div align="center">
 
 ###  Sorted
-<img src="image.png" width="500" />
+<img src="/image.png" width="500" />
 
 ###  Search
-<img src="image-1.png" width="500" />
+<img src="/image-1.png" width="500" />
 
 ###  Filtered
-<img src="image-2.png" width="500" />
+<img src="/image-2.png" width="500" />
 
 ###  Favorites Only
-<img src="image-3.png" width="500" />
+<img src="/image-3.png" width="500" />
 
 </div>
 
