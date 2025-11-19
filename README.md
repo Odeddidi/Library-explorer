@@ -78,16 +78,16 @@ All UI components are separated for clarity and maintainability.
 <div align="center">
 
 ###  Sorted
-<img src="/image.png" width="500" />
+<img src="media/image.png" width="500" />
 
 ###  Search
-<img src="/image-1.png" width="500" />
+<img src="media/image-1.png" width="500" />
 
 ###  Filtered
-<img src="/image-2.png" width="500" />
+<img src="media/image-2.png" width="500" />
 
 ###  Favorites Only
-<img src="/image-3.png" width="500" />
+<img src="media/image-3.png" width="500" />
 
 </div>
 
