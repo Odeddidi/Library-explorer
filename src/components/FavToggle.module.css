@@ -3,14 +3,14 @@
   border-radius: 6px;
   border: 1px solid black;
   cursor: pointer;
-  margin-bottom: 20px;   /* רווח מלמטה */
-  margin-top: 10px;      /* רווח מלמעלה */  
+  margin-bottom: 20px;   
+  margin-top: 10px; 
   transition: 0.2s;
   background-color: white;
 }
-
+ /* Active state, show favorites works */
 .active {
-  background: white;
+  background: rgb(177, 174, 174);
   border-color: solid black;
 }
 

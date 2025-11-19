@@ -6,9 +6,8 @@
   gap: 10px;
 }
 
-/* עטיפה שמכילה את הכפתור והפאנל */
 .filterContainer {
-  position: relative; /* פאנל ייפתח ביחס לכפתור */
+  position: relative; 
   display: inline-block;
 }
 
@@ -25,9 +24,9 @@
 /* The open panel */
 .panel {
   position: absolute;
-  top: 45px;     /* מתחת לכפתור */
+  top: 40px;     
   left: 0;
-  width: 450px;
+  width: 400px;
   background: white;
   border: 1px solid #ccc;
   padding: 15px;
@@ -36,7 +35,7 @@
   z-index: 999;
 }
 
-/* Each section inside */
+/* each section inside */
 .section {
   margin-bottom: 15px;
 }
@@ -46,11 +45,12 @@
   margin-right: 10px;
 }
 
-/* Tag buttons */
+/* tag buttons */
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 10px;
 }
 
 .tagBtn {

@@ -1,10 +1,12 @@
+/* new card grid layout, when no place for new card one line below */
 .grid {
   display: flex;
-  flex-wrap: wrap;      /* כרטיס חדש יורד שורה כשהמקום נגמר */
-  gap: 20px;            /* רווחים בין כרטיסים */
-  justify-content: center; /* מרכז את הכרטיסים במיכל */
+  flex-wrap: wrap;      
+  gap: 20px;            
+  justify-content: center;
+  margin-bottom: 20px;
 }
-.a {
+.tools {
     margin-left: 20px;
     gap: 10px;
     display: flex;
@@ -16,6 +18,7 @@
     margin-top: 20px;
     font-size: 2.5rem;
     color: #333;
+
 }
 .empty {
   grid-column: 1 / -1;

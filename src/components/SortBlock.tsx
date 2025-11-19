@@ -1,6 +1,7 @@
 import { SortOption } from "../types";
 import styles from "./SortBlock.module.css";
 
+// Props interface
 interface SortBlockProps {
   sort: SortOption;
   setSortOption: (option: SortOption) => void;
@@ -10,6 +11,7 @@ export default function SortBlock({ sort, setSortOption }: SortBlockProps) {
     return (
         <div className={styles.wrapper}>
             <label className={styles.label}>Sort by:</label>
+            {/* Sort selection , 4 Options */}
             <select
                 className={styles.select}
                 value={sort}

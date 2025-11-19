@@ -1,19 +1,23 @@
+/* the book card, minimal look */
 .card {
     position: relative;
     width: 250px;
-    height: 200px;
+    height: 220px;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
     background-color: white;
     line-height: 1.3;
-    
-    
+    transition: box-shadow 0.2s;
 
   }
+  /* hover effect for card */
+    .card:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
   .title {
-    margin: 0 0 8px 0;          /* רווח מתחת לכותרת */
+    margin: 0 0 8px 0;
     font-size: 18px;
     font-weight: 600;
   }
@@ -29,6 +33,7 @@
     margin-bottom: 10px;
   }
   
+  /* Tags container, display tags inline with some spacing */
   .tag {
     background: #eee;
     padding: 4px 8px;
@@ -37,16 +42,18 @@
     font-size: 12px;
     margin-bottom: 10px;
   }
+  /* put Star button on the bottom right */
   .favStar {
     position: absolute;
-    bottom: 8px;   /* במקום top */
-    right: 8px;    /* נשאר כי אתה רוצה פינה ימנית */
+    bottom: 8px;   
+    right: 8px;    
     font-size: 22px;
     background: none;
     border: none;
     cursor: pointer;
 
   }
+  /* Description with clamp, no more then 3 lines on regular view */
   .desc {
   display: -webkit-box;
   -webkit-line-clamp: 3; 
@@ -61,6 +68,7 @@
   margin-top: 8px;
 }
 
+/* Read more/less button, blue, look like a link */
 .readMoreBtn {
   background: none;
   border: none;

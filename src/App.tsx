@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Book, Tag, SortOption } from './types';
 import BookCard from './components/BookCard';
 import SearchBlock from './components/searchBlock';
@@ -9,6 +9,9 @@ import  styles from './App.module.css';
 
 
 function App() {
+  // initial states 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [allBooks, setAllBooks] = useState<Book[]>([]);
   const [ search, setSearch ] = useState<string>("");
   const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
@@ -17,65 +20,94 @@ function App() {
   const [sort, setSort] = useState<SortOption>("title-asc");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState<boolean>(false);
+
+  // fetch books data
+  useEffect(() => {
+  setLoading(true);      // מתחילים טעינה
+  setError(null);        // איפוס שגיאה
+
+  fetch("books.json")
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load books");
+      return res.json();
+    })
+    .then((data: Book[]) => {
+      setAllBooks(data);
+      setLoading(false);
+    })
+    .catch(err => {
+      console.error(err);
+      setError("Failed to load book data.");
+      setLoading(false);
+    });
+  }, []);
+
+  // load favorites from localStorage
   useEffect(() => {
     const storedFav = localStorage.getItem("favorites");
     if (storedFav) {
       setFavorites(JSON.parse(storedFav));
     }
   }, []);
-  useEffect(() => {
-    fetch("books.json")
-    .then(res => res.json())
-    .then((data:Book[]) =>setAllBooks(data))
-    .catch(err => console.error(err))
-  }, []);
-  let filtered = allBooks
-  // 1) search
-  .filter(book =>
-    book.title.toLowerCase().includes(search.toLowerCase()) ||
-    book.author.toLowerCase().includes(search.toLowerCase())
-  )
-  // 2) tag
-  .filter(book =>
-    selectedTag ? book.tags.includes(selectedTag) : true
-  )
-  // 3) rating
-  .filter(book =>
-    book.rating >= minRating
+  // derive all unique tags from books
+  const allTags = Array.from(
+    new Set(allBooks.flatMap(book => book.tags))
   );
 
-  if (sort === "title-asc") {
-    filtered = filtered.sort((a, b) =>
-      a.title.localeCompare(b.title)
-    );
-  }
+  // filtering and sorting books, useMemo to optimize
+  const filtered = useMemo(() => {
+    // start with all books and filter by srarch(not case sensitive)
+    let result = allBooks
+      .filter(book =>
+        book.title.toLowerCase().includes(search.toLowerCase()) ||
+        book.author.toLowerCase().includes(search.toLowerCase())
+      )
+      // then by selected tag
+      .filter(book =>
+        selectedTag ? book.tags.includes(selectedTag) : true
+      )
+      // then by min rating
+      .filter(book =>
+        book.rating >= minRating
+      );
+    // then sort based on sort option
+    if (sort === "title-asc") {
+      result = result.sort((a, b) => a.title.localeCompare(b.title));
+    }
 
-  if (sort === "title-desc") {
-    filtered = filtered.sort((a, b) =>
-      b.title.localeCompare(a.title)
-    );
-  }
+    if (sort === "title-desc") {
+      result = result.sort((a, b) => b.title.localeCompare(a.title));
+    }
 
-  if (sort === "rating-asc") {
-    filtered = filtered.sort((a, b) =>
-      a.rating - b.rating
-    );
-  }
+    if (sort === "rating-asc") {
+      result = result.sort((a, b) => a.rating - b.rating);
+    }
 
-  if (sort === "rating-desc") {
-    filtered = filtered.sort((a, b) =>
-      b.rating - a.rating
-    );
-  }
-  if (showFavoritesOnly) {
-    filtered = filtered.filter(book => favorites.includes(book.id));
-  }
+    if (sort === "rating-desc") {
+      result = result.sort((a, b) => b.rating - a.rating);
+    }
+    // finally filter by favorites if needed
+    if (showFavoritesOnly) {
+      result = result.filter(book => favorites.includes(book.id));
+    }
 
+    return result;
+  }, [
+    allBooks,
+    search,
+    selectedTag,
+    minRating,
+    sort,
+    favorites,
+    showFavoritesOnly
+  ]);
+  // reset filter function, clears all filter states
   const resetFilter = () => {
     setSelectedTag(null);
     setMinRating(0);
     setSearch("");
   }
+  // toggle favorite status and sync with localStorage
   function toggleFavorite(bookId: string) {
     setFavorites(prev => {
       let updated: string[];
@@ -88,11 +120,21 @@ function App() {
       return updated;
     });
   }
+  if (loading) {
+   return <div className={styles.empty}>Loading books...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.empty}>{error}</div>;
+  }
+
   return (
-    <div>
     
+    <div>
+      {/* App title */}
       <h1 className={styles.title}> Library Explorer </h1>
-      <div className={styles.a}>
+      {/* toolsBar: Search, Filter, Sort and favorites */}
+      <div className={styles.tools}>
       <SearchBlock search={search} setSearch={setSearch} />
       <FilterBar
         isFilterOpen={isFilterOpen}
@@ -102,13 +144,14 @@ function App() {
         minRating={minRating}
         setMinRating={setMinRating}
         onReset={() => resetFilter()}
+        tags={allTags}
       />
       <SortBlock sort={sort} setSortOption={setSort} />
       <FavToggle isFavorite={showFavoritesOnly} setShowFav={setShowFavoritesOnly} />
       </div>
-
+      {/* Books grid , display books according to user filters or empty states */}
       <div className={styles.grid}>
-        {/** 🔵 EMPTY STATES CHECKS */}
+        {/** empty states check */}
         {filtered.length === 0 ? (
           <div className={styles.empty}>
 
@@ -128,7 +171,7 @@ function App() {
           </div>
         
         ) : (
-          /** 🟢 Display the books when not empty */
+          /** Display the books when not empty */
           filtered.map(book => (
             <BookCard
               key={book.id}
