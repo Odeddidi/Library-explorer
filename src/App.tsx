@@ -23,8 +23,8 @@ function App() {
 
   // fetch books data
   useEffect(() => {
-  setLoading(true);      // מתחילים טעינה
-  setError(null);        // איפוס שגיאה
+  setLoading(true);    
+  setError(null);
 
   fetch("books.json")
     .then(res => {

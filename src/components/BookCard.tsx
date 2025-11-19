@@ -1,57 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Book } from "../types";
 import styles from "./BookCard.module.css";
 
-// Props interface
 interface BookCardProps {
   book: Book;
   isFavorite: boolean;
   onToggleFavorite: () => void;
 }
 
-// BookCard component
-export default function BookCard({
-  book,
-  isFavorite,
-  onToggleFavorite,
-}: BookCardProps) {
-
+export default function BookCard({ book, isFavorite, onToggleFavorite }: BookCardProps) {
+    // state to track if description is expanded
   const [expanded, setExpanded] = useState(false);
+  // state to track if description is overflowing
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  // ref to the description div
+  const descRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (descRef.current) {
+      const el = descRef.current;
+    
+      // check if description overflows its container
+      const overflowing = el.scrollHeight > el.clientHeight + 5;
+
+      setIsOverflowing(overflowing);
+    }
+  }, [book.description]);
 
   return (
     <div className={styles.card}>
-      {/* Favorite star */}
+        {/* favorite star toggle, change on click */}
       <div className={styles.favStar} onClick={onToggleFavorite}>
         {isFavorite ? "★" : "☆"}
       </div>
-        {/* Title and author */}
+       {/* book title and author */}
       <h3 className={styles.title}>{book.title}</h3>
       <p className={styles.author}>{book.author}</p>
-        {/* Year and rating */}
+
       <div className={styles.details}>
         {book.year} • Rating: {book.rating}
       </div>
-        {/* mapping tags and display */}
+
       <div>
-        {book.tags.map((tag_) => (
-          <span key={tag_} className={styles.tag}>
-            {tag_}
-          </span>
+        {book.tags.map(tag => (
+          <span key={tag} className={styles.tag}>{tag}</span>
         ))}
       </div>
 
-      {/* Description  */}
-      <div className={expanded ? styles.descExpanded : styles.desc}>
+      {/* description */}
+      <div
+        ref={descRef}
+        className={expanded ? styles.descExpanded : styles.desc}
+      >
         {book.description}
       </div>
 
-      {/* Read more/less button */}
-      <button
-        className={styles.readMoreBtn}
-        onClick={() => setExpanded(!expanded)}
-      >
-        {expanded ? "Read less ▲" : "Read more ▼"}
-      </button>
+      {/* read more button — shown only if there is actually overflow */}
+      {isOverflowing && (
+        <button
+          className={styles.readMoreBtn}
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded ? "Read less ▲" : "Read more ▼"}
+        </button>
+      )}
     </div>
   );
 }

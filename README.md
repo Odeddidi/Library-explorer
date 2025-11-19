@@ -6,10 +6,10 @@ The application loads a list of books, supports searching, filtering, sorting, a
 ---
 ## Table of Contents
 - [Overview](#Overview)
-- [Running Instructions](#Running-instructions)
+- [Running Instructions(locally or with Docker)](#Running-instructions)
 - [Media Examples](#Media-Examples)
 
-## 📘 Overview
+##  Overview
 The app lets users:
 
 - Load & display books from `books.json`  
@@ -67,7 +67,7 @@ docker build -t library-explorer .
 ```
 docker run -p 3000:3000 library-explorer
 ```
-Now open:
+the app will run at:
 ```
 http://localhost:3000
 ```
@@ -75,8 +75,9 @@ http://localhost:3000
 ```
 docker run -p 8080:3000 library-explorer
 ```
+the app will run at:
 ```
-open http://localhost:8080
+http://localhost:8080
 ```
 
 ---
@@ -101,8 +102,6 @@ src/
  |- Dockerfile 
 ```
 
-All UI components are separated for clarity and maintainability.
-
 ---
 
 
@@ -126,8 +125,6 @@ All UI components are separated for clarity and maintainability.
 
 ---
 
-## Contact
-
-If you have any questions:  
-**Oded didi : odeddidi@gmail.com*
+**If you have any questions:**  
+Oded didi : odeddidi@gmail.com
 
